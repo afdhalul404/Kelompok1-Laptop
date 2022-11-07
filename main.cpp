@@ -14,7 +14,7 @@ float yrot = 0;
 float xdiff = 0;
 float ydiff = 0;
 bool mouseDown = false;
-
+float ypos = 0, zpos = 0, xpos = 0,a = -9, b = -5,c =-30, buka=0;
 //DEKLARASI UNTUK MEMBUAT BENDA BERGERAK
 int gerak = 0;
 bool atas = true;
@@ -39,6 +39,24 @@ void myinit(void){
     glMatrixMode(GL_MODELVIEW);
     glPointSize(10.0);
     glLineWidth(7.0f);
+}
+
+
+void keyboard(unsigned char key, int x, int y){
+
+    switch(key){
+        case 'l':
+            buka=buka-10;
+            if (buka<-60) buka=-60;
+            glutPostRedisplay();
+        break;
+        //tutup laptop
+        case 'k':
+            buka=buka+5;
+            if (buka>90) buka=90;
+            glutPostRedisplay();
+        break;
+    }
 }
 
 //Dan selanjutnya yaitu fungsi mouse
@@ -125,149 +143,157 @@ void laptop(void){
 
 //layar
     //lcd
-    glBegin(GL_QUADS);
-    glColor3f(1,1,1);
-    glVertex3f(-67, 70, 5.5);
-    glVertex3f(67, 70, 5.5);
-    glVertex3f(67, -15, 5.5);
-    glVertex3f(-67, -15, 5.5);
-    glEnd();
+    glPushMatrix();
+    glTranslatef(10,10,13.0);
+    glRotatef(buka, 10, 0.0, 0.1);
+        glBegin(GL_QUADS);
+        glColor3f(1,0.5, 0);
+        glVertex3f(-67, 70, 5.5);
+        glVertex3f(67, 70, 5.5);
+        glVertex3f(67, -15, 5.5);
+        glVertex3f(-67, -15, 5.5);
+        glEnd();
 
-    //camera
-    glBegin(GL_QUADS);
-    glColor3f(1,1,1);
-    glVertex3f(-10, 75.8, 5.5);
-    glVertex3f(10, 75.8, 5.5);
-    glVertex3f(10, 74.5, 5.5);
-    glVertex3f(-10, 74.5, 5.5);
-    glEnd();
+        //camera
+        glBegin(GL_QUADS);
+        glColor3f(1,1,1);
+        glVertex3f(-10, 75.8, 5.5);
+        glVertex3f(10, 75.8, 5.5);
+        glVertex3f(10, 74.5, 5.5);
+        glVertex3f(-10, 74.5, 5.5);
+        glEnd();
 
-    //depan
-    glBegin(GL_QUADS);
-    glColor3ub(82, 82, 82);
-    glVertex3f(-70, 80, 0);
-    glVertex3f(70, 80, 0);
-    glVertex3f(70, -20, 0);
-    glVertex3f(-70, -20, 0);
-    glEnd();
+        //depan
+        glBegin(GL_QUADS);
+        glColor3ub(82, 82, 82);
+        glVertex3f(-70, 80, 0);
+        glVertex3f(70, 80, 0);
+        glVertex3f(70, -20, 0);
+        glVertex3f(-70, -20, 0);
+        glEnd();
 
-    //belakang
-    glBegin(GL_QUADS);
-    glColor3ub(82, 82, 82);
-    glVertex3f(-70, 80, 5);
-    glVertex3f(70, 80, 5);
-    glVertex3f(70, -20, 5);
-    glVertex3f(-70, -20, 5);
-    glEnd();
+        //belakang
+        glBegin(GL_QUADS);
+        glColor3ub(82, 82, 82);
+        glVertex3f(-70, 80, 5);
+        glVertex3f(70, 80, 5);
+        glVertex3f(70, -20, 5);
+        glVertex3f(-70, -20, 5);
+        glEnd();
 
-    //tutup atas
-    glBegin(GL_QUADS);
-    glColor3ub(82, 82, 82);
-    glVertex3f(-70, 80, 0);
-    glVertex3f(70, 80, 0);
-    glVertex3f(70, 80, 5);
-    glVertex3f(-70, 80, 5);
-    glEnd();
+        //tutup atas
+        glBegin(GL_QUADS);
+        glColor3ub(82, 82, 82);
+        glVertex3f(-70, 80, 0);
+        glVertex3f(70, 80, 0);
+        glVertex3f(70, 80, 5);
+        glVertex3f(-70, 80, 5);
+        glEnd();
 
-    //tutup kanan
-    glBegin(GL_QUADS);
-    glColor3ub(82, 82, 82);
-    glVertex3f(70, -20, 5);
-    glVertex3f(70, 80, 5);
-    glVertex3f(70, 80, 0);
-    glVertex3f(70, -20, 0);
-    glEnd();
+        //tutup kanan
+        glBegin(GL_QUADS);
+        glColor3ub(82, 82, 82);
+        glVertex3f(70, -20, 5);
+        glVertex3f(70, 80, 5);
+        glVertex3f(70, 80, 0);
+        glVertex3f(70, -20, 0);
+        glEnd();
 
-    //tutup bawah
-    glBegin(GL_QUADS);
-    glColor3ub(82, 82, 82);
-    glVertex3f(-70, -20, 5);
-    glVertex3f(70, -20, 5);
-    glVertex3f(70, -20, 0);
-    glVertex3f(-70, -20, 0);
-    glEnd();
+        //tutup bawah
+        glBegin(GL_QUADS);
+        glColor3ub(82, 82, 82);
+        glVertex3f(-70, -20, 5);
+        glVertex3f(70, -20, 5);
+        glVertex3f(70, -20, 0);
+        glVertex3f(-70, -20, 0);
+        glEnd();
 
-    //tutup kiri
-    glBegin(GL_POLYGON);
-    glColor3ub(82, 82, 82);
-    glVertex3f(-70, 80, 5);
-    glVertex3f(-70, 80, 0);
-    glVertex3f(-70, -20, 0);
-    glVertex3f(-70, -20, 5);
-    glEnd();
-
+        //tutup kiri
+        glBegin(GL_POLYGON);
+        glColor3ub(82, 82, 82);
+        glVertex3f(-70, 80, 5);
+        glVertex3f(-70, 80, 0);
+        glVertex3f(-70, -20, 0);
+        glVertex3f(-70, -20, 5);
+        glEnd();
+    glPopMatrix();
 
 
 //Bawah
-    glBegin(GL_QUADS);
-    glColor3f(0.7, 0.8, 0.8);
-    glVertex3f(-70, -20, 0);
-    glVertex3f(70, -20, 0);
-    glVertex3f(80, -110, 10);
-    glVertex3f(-80, -110, 10);
-    glEnd();
-    glBegin(GL_QUADS);
-    glColor3f(0.7, 0.8, 0.8);
-    glVertex3f(-70, -20, 5);
-    glVertex3f(70, -20, 5);
-    glVertex3f(80, -100, 15);
-    glVertex3f(-80, -100, 15);
-    glEnd();
+    glPushMatrix();
+    glTranslatef(10,10,13.0);
+    glRotatef(0,0,0,0);
+        glBegin(GL_QUADS);
+        glColor3f(0.7, 0.8, 0.8);
+        glVertex3f(-70, -20, 0);
+        glVertex3f(70, -20, 0);
+        glVertex3f(80, -110, 10);
+        glVertex3f(-80, -110, 10);
+        glEnd();
+        glBegin(GL_QUADS);
+        glColor3f(0.7, 0.8, 0.8);
+        glVertex3f(-70, -20, 5);
+        glVertex3f(70, -20, 5);
+        glVertex3f(80, -100, 15);
+        glVertex3f(-80, -100, 15);
+        glEnd();
 
-    //tutup depan
-    glBegin(GL_QUADS);
-    glColor3f(0.7, 0.8, 0.8);
-    glVertex3f(80, -100, 15);
-    glVertex3f(80, -110, 10);
-    glVertex3f(-80, -110, 10);
-    glVertex3f(-80, -100, 15);
-    glEnd();
+        //tutup depan
+        glBegin(GL_QUADS);
+        glColor3f(0.7, 0.8, 0.8);
+        glVertex3f(80, -100, 15);
+        glVertex3f(80, -110, 10);
+        glVertex3f(-80, -110, 10);
+        glVertex3f(-80, -100, 15);
+        glEnd();
 
-    //tutup kanan
-    glBegin(GL_QUADS);
-    glColor3f(.7, 0.8, 0.8);
-    glVertex3f(70, -20, 5);
-    glVertex3f(70, -20, 0);
-    glVertex3f(80, -110, 10);
-    glVertex3f(75, -100, 15);
-    glEnd();
+        //tutup kanan
+        glBegin(GL_QUADS);
+        glColor3f(.7, 0.8, 0.8);
+        glVertex3f(70, -20, 5);
+        glVertex3f(70, -20, 0);
+        glVertex3f(80, -110, 10);
+        glVertex3f(75, -100, 15);
+        glEnd();
 
-    //tutup kiri
-    glBegin(GL_QUADS);
-    glColor3f(.7, 0.8, 0.8);
-    glVertex3f(-70, -20, 5);
-    glVertex3f(-70, -20, 0);
-    glVertex3f(-80, -110, 10);
-    glVertex3f(-75, -100, 15);
-    glEnd();
+        //tutup kiri
+        glBegin(GL_QUADS);
+        glColor3f(.7, 0.8, 0.8);
+        glVertex3f(-70, -20, 5);
+        glVertex3f(-70, -20, 0);
+        glVertex3f(-80, -110, 10);
+        glVertex3f(-75, -100, 15);
+        glEnd();
 
 
-//keyboard
-    glBegin(GL_QUADS);
-    glColor3f(1,1,1);
-    glVertex3f(-68, -23, 6);
-    glVertex3f(68, -23, 6);
-    glVertex3f(73, -65, 11);
-    glVertex3f(-73, -65, 11);
-    glEnd();
+    //keyboard
+        glBegin(GL_QUADS);
+        glColor3f(1,1,1);
+        glVertex3f(-68, -23, 6);
+        glVertex3f(68, -23, 6);
+        glVertex3f(73, -65, 11);
+        glVertex3f(-73, -65, 11);
+        glEnd();
 
-    //kursor
-    glBegin(GL_QUADS);
-    glColor3f(0.9, 0.9, 0.8);
-    glVertex3f(-25, -68, 16);
-    glVertex3f(25, -68, 16);
-    glVertex3f(26, -97, 15);
-    glVertex3f(-26, -97, 15);
-    glEnd();
+        //kursor
+        glBegin(GL_QUADS);
+        glColor3f(0.9, 0.9, 0.8);
+        glVertex3f(-25, -68, 16);
+        glVertex3f(25, -68, 16);
+        glVertex3f(26, -97, 15);
+        glVertex3f(-26, -97, 15);
+        glEnd();
 
-    //keycaps
-    glBegin(GL_QUADS);
-    glColor3f(0.4, 0.4, 0.4);
-    dda(-61, -30, 10, 61, -30, 10);
-    dda(-63, -40, 10, 63, -40, 10);
-    dda(-65, -50, 10, 65, -50, 10);
-    dda(-67, -60, 13, 67, -60, 13);
-    glEnd();
+        //keycaps
+        glBegin(GL_QUADS);
+        glColor3f(0.4, 0.4, 0.4);
+        dda(-61, -25, 10, 61, -25, 10);
+        dda(-63, -35, 10, 63, -35, 10);
+        dda(-65, -45, 10, 65, -45, 10);
+        dda(-67, -53, 13, 67, -53, 13);
+        dda(-69, -60, 13, 69, -60, 13);
+        glEnd();
+    glPopMatrix();
 
 glPushMatrix();
 glPopMatrix();
@@ -290,6 +316,7 @@ int main(int argc, char **argv){
 	glutMouseFunc(mouse);
 	glutMotionFunc(mouseMotion);
     glutReshapeFunc(ukur);
+    glutKeyboardFunc(keyboard);
     glutMainLoop();
     //kettypuny
 }
